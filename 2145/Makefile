@@ -1,7 +1,15 @@
+ifdef SYSTEMROOT
+RM = del
+else ifeq ($(shell uname),Linux)
+EM = rm -f
+endif
+
+
 SRC = date_gen.cpp
-EXE = gen.exe
-SOL = solu.exe
+EXE = gen
+SOL = solu
 STD = std.cpp
+RBS = a.out a.exe
 
 # arg1 output file
 # 2 N
@@ -17,7 +25,7 @@ all:${EXE}
 	./${EXE} 6.in 10000 30000000 20000000 2000 0
 	./${EXE} 7.in 20000 30000000 20000000 200000 100000
 	./${EXE} 8.in 30000 30000000 20000000 10000000 0
-	./${EXE} 9.in 40000 30000000 20000000 10000000 10000
+	./${EXE} 9.in 50000 30000000 20000000 1000 0
 	./${EXE} 10.in 50000 30000000 20000000 10000000 1000000
 
 ${EXE}:
@@ -39,4 +47,4 @@ ${SOL}:
 	g++ ./${STD} -o ${SOL} -D _OUTPUT_
 
 clean:
-	del ${EXE} ${SOL}
+	${RM} ${EXE} ${SOL} ${RBS}
